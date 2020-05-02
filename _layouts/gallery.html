@@ -1,0 +1,34 @@
+---
+layout: default
+color: "#fff6c1"
+---
+
+<!-- Carrousel -->
+<section class="main bg-primary d-flex" style="background-color: {{ page.color }}!important">
+
+	<h2 class="mb-1 text-vertical">{{ page.title }}</h2>
+  
+  <div class="carousel text-center my-auto">
+
+	{% assign gallery_id = page.title | downcase %}
+    {% assign image_files = site.static_files | where: "image", true %}
+
+    {% for file in image_files %}
+
+
+    	{% if file.path contains gallery_id %}
+
+	      <div class="carousel-cell">
+	        <span class="helper"></span><img  class="carousel-cell-image" src="{{ file.path }}">
+	      </div>
+
+      	{% endif %}
+
+    {% endfor %}
+
+  </div>
+
+</section>
+
+
+{{ content }}

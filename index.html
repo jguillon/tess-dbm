@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+<!-- Carrousel -->
+<section class="main bg-primary d-flex">
+  <div class="carousel text-center my-auto" data-flickity='{ "fullscreen": true, "imagesLoaded": true, "initialIndex": 1, "resize": false}'>
+
+    {% assign image_files = site.static_files | where: "image", true %}
+    {% for file in image_files %}
+      
+      <div class="carousel-cell">
+        <span class="helper"></span><img  class="carousel-cell-image" src="{{ file.path }}">
+      </div>
+
+    {% endfor %}
+
+  </div>
+</section>

@@ -1,1 +1,13 @@
-theme: jekyll-theme-minimal
+url: http://tess-dbm.fr
+permalink: pretty
+sass:
+    sass_dir: _sass
+    style: compressed
+defaults:
+  - scope:
+      path: "assets/img"
+    values:
+      image: true
+collections:
+  galleries:
+    output: true
