@@ -1,32 +1,32 @@
 {
-    "title": "Stylish Portfolio",
-    "name": "startbootstrap-stylish-portfolio",
-    "version": "5.0.7",
+    "title": "Tess Dbm.",
+    "name": "tess-dbm",
+    "version": "0.0.1",
     "scripts": {
         "start": "node_modules/.bin/gulp watch"
     },
-    "description": "A stylish portfolio HTML template built with Bootstrap",
+    "description": "Tess Debellemaniere photo book",
     "keywords": [
-        "css",
-        "sass",
-        "html",
-        "responsive",
-        "theme",
-        "template"
+        "photography",
+        "book",
+        "miss",
+        "Tess",
+        "Debellemaniere",
+        "fashion"
     ],
-    "homepage": "https://startbootstrap.com/template-overviews/stylish-portfolio",
+    "homepage": "http://tess-dbm.fr",
     "bugs": {
-        "url": "https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio/issues",
-        "email": "feedback@startbootstrap.com"
+        "url": "https://github.com/jguillon/tess-dbm/issues",
+        "email": "jeremy.damien.guillon@gmail.com"
     },
     "license": "MIT",
-    "author": "Start Bootstrap",
+    "author": "Jeremy Guillon",
     "contributors": [
-        "David Miller (http://davidmiller.io/)"
+        "Jeremy Guillon (http://guillonjeremy.co/)"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio.git"
+        "url": "https://github.com/jguillon/tess-dbm.git"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "5.10.2",
@@ -40,6 +40,7 @@
     },
     "devDependencies": {
         "browser-sync": "2.26.7",
+        "child-process": "^1.0.2",
         "del": "5.1.0",
         "gulp": "^4.0.2",
         "gulp-autoprefixer": "7.0.0",

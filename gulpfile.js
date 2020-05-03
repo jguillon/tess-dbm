@@ -12,6 +12,7 @@ const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const uglify = require("gulp-uglify");
+const cp = require("child_process");
 
 // Load package.json for banner
 const pkg = require('./package.json');
@@ -29,7 +30,7 @@ const banner = ['/*!\n',
 function browserSync(done) {
   browsersync.init({
     server: {
-      baseDir: "./"
+      baseDir: "_site"
     },
     port: 3000
   });
@@ -126,16 +127,24 @@ function js() {
     .pipe(browsersync.stream());
 }
 
+// Jekyll build
+function jekyllBuild(done) {
+  browsersync.notify('Building Jekyll');
+  return cp.spawn('jekyll', ['build'], {stdio: 'inherit'})
+      .on('close', done);
+}
+
 // Watch files
 function watchFiles() {
   gulp.watch("./scss/**/*", css);
   gulp.watch("./js/**/*", js);
   gulp.watch("./**/*.html", browserSyncReload);
+  gulp.watch("./**/*.md", browserSyncReload);
 }
 
 // Define complex tasks
 const vendor = gulp.series(clean, modules);
-const build = gulp.series(vendor, gulp.parallel(css, js));
+const build = gulp.series(vendor, gulp.parallel(css, js), jekyllBuild);
 const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 
 // Export tasks

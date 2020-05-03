@@ -10,7 +10,7 @@ color: "#fff6c1"
   
   <div class="carousel text-center my-auto">
 
-	{% assign gallery_id = page.title | downcase %}
+    {% assign gallery_id = page.title | downcase %}
     {% assign image_files = site.static_files | where: "image", true %}
 
     {% for file in image_files %}
@@ -22,7 +22,7 @@ color: "#fff6c1"
 	        <span class="helper"></span><img  class="carousel-cell-image" src="{{ file.path }}">
 	      </div>
 
-      	{% endif %}
+      {% endif %}
 
     {% endfor %}
 
