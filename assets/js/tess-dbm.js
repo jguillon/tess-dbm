@@ -54,23 +54,32 @@
 
 })(jQuery); // End of use strict
 
-// Disable Google Maps scrolling
-// See http://stackoverflow.com/a/25904582/1607849
-// Disable scroll zooming and bind back the click event
-var onMapMouseleaveHandler = function(event) {
-  var that = $(this);
-  that.on('click', onMapClickHandler);
-  that.off('mouseleave', onMapMouseleaveHandler);
-  that.find('iframe').css("pointer-events", "none");
-}
-var onMapClickHandler = function(event) {
-  var that = $(this);
-  // Disable the click handler until the user leaves the map area
-  that.off('click', onMapClickHandler);
-  // Enable scrolling zoom
-  that.find('iframe').css("pointer-events", "auto");
-  // Handle the mouse leave event
-  that.on('mouseleave', onMapMouseleaveHandler);
-}
-// Enable map zooming with mouse scroll when the user clicks the map
-$('.map').on('click', onMapClickHandler);
+
+  let parallax_sections = document.querySelectorAll('.parallax');
+  for (let elem of parallax_sections) {
+    console.log(elem);
+    const modifier = elem.getAttribute('data-depth')
+    console.log(modifier);
+   
+    let instance = basicScroll.create({
+      elem: elem,
+      from: 'top-bottom',
+      to: 'bottom-top',
+      inside: (instance, percentage, props) => {
+          console.log(`${elem.id} is inside from and to`)
+      },
+      outside: (instance, percentage, props) => {
+          console.log(`${elem.id} is inside from and to`)
+      },
+      direct: true,
+      props: {
+        '--translateY': {
+          from: `${ 200 * modifier }px`,
+          to: `${ -200 * modifier }px`,
+        }
+      }
+    })
+
+    instance.start()
+    
+  }

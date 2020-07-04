@@ -1,0 +1,9 @@
+.parallax {
+  position: absolute;
+  transform: translateY(var(--translateY));
+  will-change: transform;
+}
+
+.patchwork {
+	height: 200vh;
+}

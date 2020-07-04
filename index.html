@@ -1,19 +1,32 @@
 ---
 layout: default
 ---
-
-<!-- Carrousel -->
-<section class="main bg-primary d-flex">
-  <div class="carousel text-center my-auto" data-flickity='{ "fullscreen": true, "imagesLoaded": true, "initialIndex": 1, "resize": false}'>
-
+<div class="container">
+    
     {% assign image_files = site.static_files | where: "image", true %}
-    {% for file in image_files %}
-      
-      <div class="carousel-cell">
-        <span class="helper"></span><img  class="carousel-cell-image" src="{{ file.path }}">
-      </div>
-
+    {% for gallery in site.galleries %}
+        {% assign gallery_id = gallery.title | downcase %}
+        
+        <section id="{{ gallery_id }}-patchwork" class="patchwork row">
+            <div class="patchwork-description col-3">
+                <h2>{{ gallery.title }}</h2>
+                <p>
+                    Patchwork
+                </p>
+            </div>
+            {% assign i = 0 %}
+            {% for file in image_files %}
+                {% if file.path contains gallery_id %}
+                    {% assign i = i | plus: 1 %}
+                    <div class="patchwork-cell parallax col-3 offset-{{ i }}" data-depth="{{ i }}">
+                        <img class="patchwork-image" src="{{ file.path }}" style="width: 100%;">
+                    </div>
+                    {% if i >= 3 %}
+                        {% break %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </section>
     {% endfor %}
 
-  </div>
-</section>
+</div>

@@ -68,6 +68,9 @@ function modules() {
       '!./node_modules/jquery/dist/core.js'
     ])
     .pipe(gulp.dest('./vendor/jquery'));
+  // basicScroll
+  var basicScroll = gulp.src('./node_modules/basicscroll/dist/**/*')
+    .pipe(gulp.dest('./vendor/basicscroll'));
   // flickity
   var flickity = gulp.src('./node_modules/flickity/dist/**/*')
     .pipe(gulp.dest('./vendor/flickity'));
@@ -80,7 +83,7 @@ function modules() {
   var simpleLineIconsCSS = gulp.src('./node_modules/simple-line-icons/css/**')
     .pipe(gulp.dest('./vendor/simple-line-icons/css'));
   return merge(bootstrap, fontAwesomeCSS, fontAwesomeWebfonts, jquery, 
-    jqueryEasing, flickity, flickityFullscreen,
+    jqueryEasing, basicScroll, flickity, flickityFullscreen,
     simpleLineIconsFonts, simpleLineIconsCSS);
 }
 
@@ -136,10 +139,16 @@ function jekyllBuild(done) {
 
 // Watch files
 function watchFiles() {
-  gulp.watch("./scss/**/*", css);
-  gulp.watch("./js/**/*", js);
-  gulp.watch("./**/*.html", browserSyncReload);
-  gulp.watch("./**/*.md", browserSyncReload);
+  gulp.watch("./assets/scss/**/*", 
+    gulp.series(css, jekyllBuild, browserSyncReload));
+  gulp.watch("./_sass/**/*", 
+    gulp.series(css, jekyllBuild, browserSyncReload));
+  gulp.watch("./assets/js/**/*", 
+    gulp.series(js, jekyllBuild, browserSyncReload));
+  gulp.watch(["./**/*.html", "!./_site/**/*.html"], 
+    gulp.series(jekyllBuild, browserSyncReload));
+  gulp.watch(["./**/*.md", "!./_site/**/*.md"], 
+    gulp.series(jekyllBuild, browserSyncReload));
 }
 
 // Define complex tasks
